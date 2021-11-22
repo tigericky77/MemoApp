@@ -1,27 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  View, Text, TextInput, StyleSheet, TouchableOpacity,
+  View, Text, TextInput, StyleSheet, TouchableOpacity, Alert,
 } from 'react-native';
+import firebase from 'firebase';
 
 import Button from '../components/Button';
 
 // eslint-disable-next-line react/function-component-definition
 export default function SignUpScreen(props) {
   const { navigation } = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handlePress() {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        console.log(user.uid);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoList' }],
+        });
+      })
+      .catch((error) => {
+        Alert.alert(error.code);
+      });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
-        <TextInput style={styles.input} value="Email Address" />
-        <TextInput style={styles.input} value="Password" />
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={(text) => { setEmail(text); }}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email Address"
+          textContentType="emailAddress"
+        />
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={(text) => { setPassword(text); }}
+          autoCapitalize="none"
+          placeholder="Password"
+          secureTextEntry
+          textContentType="password"
+        />
         <Button
           label="Submit"
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'MemoList' }],
-            });
-          }}
+          // eslint-disable-next-line react/jsx-no-bind
+          onPress={handlePress}
         />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registered?</Text>
@@ -60,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     height: 48,
     backgroundColor: '#FFFFFF',
-    color: '#DDDDDD',
+    // color: '#DDDDDD',
     borderColor: '#DDDDDD',
     borderWidth: 1,
     paddingHorizontal: 8,
