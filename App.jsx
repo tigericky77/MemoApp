@@ -20,7 +20,6 @@ if (firebase.apps.length === 0) {
 
 const Stack = createStackNavigator();
 
-// eslint-disable-next-line react/function-component-definition
 export default function App() {
   return (
     <NavigationContainer>

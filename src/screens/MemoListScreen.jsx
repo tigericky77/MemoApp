@@ -6,7 +6,6 @@ import MemoList from '../components/MemoList';
 import CircleButton from '../components/CircleButton';
 import LogOutButton from '../components/LogOutButton';
 
-// eslint-disable-next-line react/function-component-definition
 export default function MemoListScreen(props) {
   const { navigation } = props;
   const [memos, setMemos] = useState([]);
