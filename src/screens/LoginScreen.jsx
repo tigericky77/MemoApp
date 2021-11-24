@@ -6,6 +6,7 @@ import firebase from 'firebase';
 
 import Button from '../components/Button';
 import Loading from '../components/Loading';
+// eslint-disable-next-line import/named
 import { translateErrors } from '../utils';
 
 export default function LoginScreen(props) {
@@ -31,9 +32,7 @@ export default function LoginScreen(props) {
   function handlePress() {
     setLoading(true);
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        console.log(user.uid);
+      .then(() => {
         navigation.reset({
           index: 0,
           routes: [{ name: 'MemoList' }],
@@ -73,7 +72,6 @@ export default function LoginScreen(props) {
         />
         <Button
           label="Submit"
-          // eslint-disable-next-line react/jsx-no-bind
           onPress={handlePress}
         />
         <View style={styles.footer}>

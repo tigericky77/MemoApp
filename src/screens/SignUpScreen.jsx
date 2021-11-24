@@ -5,9 +5,9 @@ import {
 import firebase from 'firebase';
 
 import Button from '../components/Button';
+// eslint-disable-next-line import/named
 import { translateErrors } from '../utils';
 
-// eslint-disable-next-line react/function-component-definition
 export default function SignUpScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
@@ -15,9 +15,7 @@ export default function SignUpScreen(props) {
 
   function handlePress() {
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        console.log(user.uid);
+      .then(() => {
         navigation.reset({
           index: 0,
           routes: [{ name: 'MemoList' }],

@@ -7,6 +7,7 @@ import firebase from 'firebase';
 
 import CircleButton from '../components/CircleButton';
 import KeyboardSafeView from '../components/KeyboardSafeView';
+// eslint-disable-next-line import/named
 import { translateErrors } from '../utils';
 
 export default function MemoEditScreen(props) {
