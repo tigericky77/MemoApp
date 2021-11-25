@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   footerLink: {
     fontSize: 14,
     lineHeight: 24,
-    color: '#467FD3',
+    color: '#239486',
   },
   footer: {
     flexDirection: 'row',
